@@ -9,6 +9,8 @@ import {Link, useNavigate} from 'react-router-dom';
 import {userSignup} from '../../../Api/userApi';
 import {ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from "react-redux";
+import {setUserDetails} from '../../../Redux/UserSlice/UserSlice'
 
   export default  function Singup() {
 
@@ -18,6 +20,7 @@ import 'react-toastify/dist/ReactToastify.css';
     const [password,setPassword] = useState('');
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     
 
@@ -37,7 +40,14 @@ import 'react-toastify/dist/ReactToastify.css';
             const response = await userSignup({name,number,email,password});
     
             if(response.data.status){
-              localStorage.setItem('token',response.data.token)
+              localStorage.setItem('token',response.data.token);
+              console.log(response.data.userData._id,'hiiiiiiiiiiiiiiiiiiii');
+              dispatch(setUserDetails({
+                id:response.data.userData._id,
+                name:response.data.userData.name,
+                number:response.data.userData.mobile,
+                is_admin:response.data.userData.is_admin,
+              }))
               navigate('/')
             }else{
               toast(response.data.alert);

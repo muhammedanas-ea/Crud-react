@@ -9,6 +9,8 @@ import { userLogin } from '../../../Api/userApi';
 import {Link, useNavigate} from 'react-router-dom';  
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useDispatch } from "react-redux";
+import {setUserDetails} from '../../../Redux/UserSlice/UserSlice';
    
 
 export default function Login() {
@@ -16,6 +18,7 @@ export default function Login() {
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('');
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
 
 // ********* SIGN IN FROM CONTROLL FUCTION AN DATA PASSING SECTION ********//  
@@ -29,7 +32,13 @@ export default function Login() {
       }else{
         const response = await userLogin({email,password});
         if(response.data.status){
-          localStorage.setItem('token',response.data.token)
+          localStorage.setItem('token',response.data.token);
+          dispatch(setUserDetails({
+            id:response.data.userData._id,
+            name:response.data.userData.name,
+            email:response.data.userData.email,
+            is_admin:response.data.userData.is_admin,
+          }))
           navigate('/')
         }else{
           toast(response.data.alert);

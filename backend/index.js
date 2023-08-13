@@ -17,6 +17,9 @@ app.use(cors())
 const userRoutes = require('./Routes/userRouter');
 app.use('/',userRoutes);
 
+const adminRoutes = require('./Routes/adminRouter');
+app.use('/admin',adminRoutes);
+
 
 
 
