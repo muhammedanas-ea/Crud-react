@@ -7,26 +7,12 @@ import {
   IconButton,
 } from "@material-tailwind/react";
 
-import {Link, useNavigate} from 'react-router-dom'
-import { useDispatch } from "react-redux";
-import {logoutDetails} from '../../Redux/UserSlice/UserSlice'
+
+
 
  
-export default function Header() {
+export default function AdminHeader() {
 
-  const dispatch = useDispatch()
-  const navigate=useNavigate()
-
-  const handleLogout = ()=> {
-    localStorage.removeItem('token')
-    dispatch(logoutDetails({
-      id:'',
-      name:'',
-      email:'',
-      mobile:'',
-    }))
-    navigate('/')
-  }
 
 
   const [openNav, setOpenNav] = React.useState(false);
@@ -40,50 +26,15 @@ export default function Header() {
  
   const navList = (
     <ul className="mb-4 mt-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-       <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
-        <Link to={'/'} className="flex items-center">Home</Link>
-      </Typography>
-
-      {localStorage.getItem('token') ? (
         <div className="flex gap-5">
-          <Typography
-          as="li"
-          variant="small"
-          color="blue-gray"
-          className="p-1 font-normal"
-        >
-          <Link to={'/profile'} className="flex items-center">Profile</Link>
-        </Typography>
          <Button
          variant="gradient"
          size="sm"
          className="hidden lg:inline-block"
-         onClick={handleLogout}
        >
          <span>Logout</span>
        </Button>
        </div>
-      ) : (
-        <Typography
-        as="li"
-        variant="small"
-        color="blue-gray"
-        className="p-1 font-normal"
-      >
-        <Button
-         variant="gradient"
-         size="sm"
-         className="hidden lg:inline-block"
-       >
-         <span><Link to={'/login'}>Login</Link></span>
-       </Button>
-      </Typography>
-      )}
     </ul>
   );
  
@@ -96,7 +47,7 @@ export default function Header() {
             href="#"
             className="mr-4 cursor-pointer py-1.5 font-medium"
           >
-            CRUD-APP
+            Admin Dashboard
           </Typography>
           <div className="flex items-center gap-4">
             <div className="mr-4 hidden lg:block">{navList}</div>

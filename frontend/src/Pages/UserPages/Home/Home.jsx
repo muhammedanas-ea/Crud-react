@@ -1,11 +1,11 @@
-import Header from  '../../../Components/Header/Header';
-import Banner from '../../../Components/Banner/Banner';
+import Header from  '../../../Components/Header/Header'
+import Banner from '../../../Components/Banner/Banner'
 
 function Home(){
   return(
     <div>
-      <Header/>,
-      <Banner/>,
+      <Header/>
+      <Banner/>
     </div>
   )
 }

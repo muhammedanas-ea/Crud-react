@@ -22,6 +22,10 @@ const userSchema = new mongoose.Schema({
     is_admin:{
         type:Number,
         required:true,
+    },
+    image:{
+        type:String,
+        default:''
     }
 })
 

@@ -22,3 +22,23 @@ export async function userLogin(loginData){
         console.log(err);
     }
 }
+
+
+export async function userImage(id,images){
+    try{
+        
+        const data= new FormData()
+        data.append('image', images);
+        data.append('userId', id);
+        const config={
+            header:{
+                'content-type':'multipart/form-data',
+                userId : id
+            },WithCreadentials:true
+        }
+        const response = await userApi.post('/profileImage',data,config);
+        return response
+    }catch(err){
+        console.log(err);
+    }
+}

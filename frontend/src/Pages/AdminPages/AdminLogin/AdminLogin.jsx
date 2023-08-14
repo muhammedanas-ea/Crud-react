@@ -3,11 +3,11 @@ import {
     Input,
     Button,
     Typography,
-  } from "@material-tailwind/react";
-import { useState } from "react";
-import {Adminsignin} from '../../../Api/adminApi';
-import {ToastContainer,toast} from 'react-toastify';
-import {useNavigate} from 'react-router-dom';
+  } from "@material-tailwind/react"
+import { useState } from "react"
+import {Adminsignin} from '../../../Api/adminApi'
+import {ToastContainer,toast} from 'react-toastify'
+import {useNavigate} from 'react-router-dom'
    
 
 export default function AdminLogin() {
@@ -15,7 +15,7 @@ export default function AdminLogin() {
     const [value,setValue] = useState({
       email:'',password:'',
     });
-    const navigate = useNavigate();
+    const navigate = useNavigate()
 
 
     const handleAdminLogin = async (e) => {

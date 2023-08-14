@@ -3,85 +3,86 @@ import {
     Input,
     Button,
     Typography,
-  } from "@material-tailwind/react";
-import { useState } from "react";
-import {Link, useNavigate} from 'react-router-dom';   
-import {userSignup} from '../../../Api/userApi';
-import {ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { useDispatch } from "react-redux";
+  } from "@material-tailwind/react"
+import { useState } from "react"
+import {Link, useNavigate} from 'react-router-dom'  
+import {userSignup} from '../../../Api/userApi'
+import {ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { useDispatch } from "react-redux"
 import {setUserDetails} from '../../../Redux/UserSlice/UserSlice'
 
-  export default  function Singup() {
 
-    const [name,setName] = useState('');
-    const [number,setNumber] = useState('');
-    const [email,setEmail] = useState('');
-    const [password,setPassword] = useState('');
+export default  function Singup() {
 
-    const navigate = useNavigate();
-    const dispatch = useDispatch();
+  const [name,setName] = useState('');
+  const [number,setNumber] = useState('');
+  const [email,setEmail] = useState('');
+  const [password,setPassword] = useState('');
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
     
 
 // ********* SIGN UP FROM CONTROLL FUCTION AN DATA PASSING SECTION ********//
-    const handleSubmit = async (e) =>{
-      e.preventDefault();
-      try{
-          if(name.trim() === ''){
-            toast('please enter your email')
-          }else if(number.trim() === ''){
-            toast('pleas enter your number ')
-          }else if(email.trim() === ''){
-            toast('pleace enter your email')
-          }else if(password.trim() === ''){
-            toast('pleace enter your password')
+  const handleSubmit = async (e) =>{
+    e.preventDefault();
+    try{
+        if(name.trim() === ''){
+          toast('please enter your email')
+        }else if(number.trim() === ''){
+          toast('pleas enter your number ')
+        }else if(email.trim() === ''){
+          toast('pleace enter your email')
+        }else if(password.trim() === ''){
+          toast('pleace enter your password')
+        }else{
+          const response = await userSignup({name,number,email,password});
+  
+          if(response.data.status){
+            localStorage.setItem('token',response.data.token);
+            dispatch(setUserDetails({
+              id:response.data.userData._id,
+              name:response.data.userData.name,
+              mobile:response.data.userData.mobile,
+              email:response.data.userData.email,
+              image:response.data.userData.image,
+              is_admin:response.data.userData.is_admin,
+            }))
+            navigate('/')
           }else{
-            const response = await userSignup({name,number,email,password});
-    
-            if(response.data.status){
-              localStorage.setItem('token',response.data.token);
-              console.log(response.data.userData._id,'hiiiiiiiiiiiiiiiiiiii');
-              dispatch(setUserDetails({
-                id:response.data.userData._id,
-                name:response.data.userData.name,
-                number:response.data.userData.mobile,
-                is_admin:response.data.userData.is_admin,
-              }))
-              navigate('/')
-            }else{
-              toast(response.data.alert);
-            }
-          } 
-      }catch(err){
-        console.log(err);
-      }
+            toast(response.data.alert);
+          }
+        } 
+    }catch(err){
+      console.log(err);
     }
-
-    return (
-     <div className="w-full flex justify-center">
-         <Card color="transparent" shadow={false}>
-        <Typography variant="h4" color="blue-gray" className="text-start">
-          Sign Up
-        </Typography>
-        <form onSubmit={handleSubmit} className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
-          <div className="mb-4 flex flex-col gap-6">
-            <Input type="text" value={name} onChange={(e) => setName(e.target.value)} size="lg" label="Name" />
-            <Input type="text" value={number} onChange={(e) => setNumber(e.target.value)} size="lg" label="Number" />
-            <Input type='email' value={email} onChange={(e) => setEmail(e.target.value)} size="lg" label="Email" />
-            <Input value={password} onChange={(e) => setPassword(e.target.value)} type="password" size="lg" label="Password" />
-          </div>
-          <Button className="mt-6" type="submit" fullWidth>
-            Register
-          </Button>
-          <Typography color="gray" className="mt-4 text-center font-normal">
-            Already have an account?{" "}
-              <Link to={'/login'} className="font-medium text-gray-900">Sign In</Link>
-          </Typography>
-          
-        </form>
-        <ToastContainer />
-      </Card>
-     </div>
-    );
   }
+
+  return (
+    <div className="w-full flex justify-center">
+        <Card color="transparent" shadow={false}>
+      <Typography variant="h4" color="blue-gray" className="text-start">
+        Sign Up
+      </Typography>
+      <form onSubmit={handleSubmit} className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
+        <div className="mb-4 flex flex-col gap-6">
+          <Input type="text" value={name} onChange={(e) => setName(e.target.value)} size="lg" label="Name" />
+          <Input type="text" value={number} onChange={(e) => setNumber(e.target.value)} size="lg" label="Number" />
+          <Input type='email' value={email} onChange={(e) => setEmail(e.target.value)} size="lg" label="Email" />
+          <Input value={password} onChange={(e) => setPassword(e.target.value)} type="password" size="lg" label="Password" />
+        </div>
+        <Button className="mt-6" type="submit" fullWidth>
+          Register
+        </Button>
+        <Typography color="gray" className="mt-4 text-center font-normal">
+          Already have an account?{" "}
+            <Link to={'/login'} className="font-medium text-gray-900">Sign In</Link>
+        </Typography>
+        
+      </form>
+      <ToastContainer />
+    </Card>
+    </div>
+  );
+}

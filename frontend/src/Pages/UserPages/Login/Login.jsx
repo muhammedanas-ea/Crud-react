@@ -3,14 +3,14 @@ import {
     Input,
     Button,
     Typography,
-  } from "@material-tailwind/react";
-import { useState } from "react";
-import { userLogin } from '../../../Api/userApi';
-import {Link, useNavigate} from 'react-router-dom';  
-import {ToastContainer, toast} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { useDispatch } from "react-redux";
-import {setUserDetails} from '../../../Redux/UserSlice/UserSlice';
+  } from "@material-tailwind/react"
+import { useState } from "react"
+import { userLogin } from '../../../Api/userApi'
+import {Link, useNavigate} from 'react-router-dom' 
+import {ToastContainer, toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { useDispatch } from "react-redux"
+import {setUserDetails} from '../../../Redux/UserSlice/UserSlice'
    
 
 export default function Login() {
@@ -37,6 +37,8 @@ export default function Login() {
             id:response.data.userData._id,
             name:response.data.userData.name,
             email:response.data.userData.email,
+            mobile:response.data.userData.mobile,
+            image:response.data.userData.image,
             is_admin:response.data.userData.is_admin,
           }))
           navigate('/')

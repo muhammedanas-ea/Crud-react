@@ -1,6 +1,8 @@
-import { Carousel, Typography, Button } from "@material-tailwind/react";
+import { Carousel, Typography} from "@material-tailwind/react";
+import {useSelector} from 'react-redux'
  
 export default function Banner() {
+  const { name } = useSelector(state => state.user)
   return (
     <Carousel className="rounded-xl">
       <div className="relative h-full w-full">
@@ -16,23 +18,8 @@ export default function Banner() {
               color="white"
               className="mb-4 text-3xl md:text-4xl lg:text-5xl"
             >
-              The Beauty of Nature
+              welcome {name}
             </Typography>
-            <Typography
-              variant="lead"
-              color="white"
-              className="mb-12 opacity-80"
-            >
-              It is not so much for its beauty that the forest makes a claim
-              upon men&apos;s hearts, as for that subtle something, that quality
-              of air that emanation from old trees, that so wonderfully changes
-              and renews a weary spirit.
-            </Typography>
-            <div className="flex justify-center gap-2">
-              <Button size="lg" color="white">
-                Profile
-              </Button>
-            </div>
           </div>
         </div>
       </div>

@@ -63,7 +63,22 @@ const userLoginVerification = async(req,res) => {
     }
 }
 
+
+const userprofileImageUpdate = async (req,res) =>{
+    try{
+        const id=req.body.userId
+        const image=req.file.filename
+        const updateImg = await User.findOneAndUpdate({_id:id},{$set:{image:image}},{new:true}).then((response)=>{
+            res.json({updated:true,data:response})
+        })
+       
+    }catch(err){
+        console.log(err);
+    }
+}
+
 module.exports = {
     userRegistaion,
     userLoginVerification,
+    userprofileImageUpdate,
 }
