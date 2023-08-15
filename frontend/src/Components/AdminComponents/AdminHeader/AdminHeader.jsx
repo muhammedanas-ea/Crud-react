@@ -6,13 +6,30 @@ import {
   Button,
   IconButton,
 } from "@material-tailwind/react";
-
+import { useDispatch } from "react-redux"
+import {logoutDetails} from '../../../Redux/UserSlice/UserSlice'
+import { useNavigate } from "react-router-dom";
 
 
 
  
 export default function AdminHeader() {
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () =>{
+    localStorage.removeItem('admintoken')
+    dispatch(logoutDetails({
+      id:'',
+      name:'',
+      email:'',
+      mobile:'',
+      is_admin:'',
+      image:''
+    }))
+    navigate('/admin')
+}
 
 
   const [openNav, setOpenNav] = React.useState(false);
@@ -31,6 +48,7 @@ export default function AdminHeader() {
          variant="gradient"
          size="sm"
          className="hidden lg:inline-block"
+         onClick={handleLogout}
        >
          <span>Logout</span>
        </Button>
@@ -92,7 +110,7 @@ export default function AdminHeader() {
         </div>
         <MobileNav open={openNav}>
           {navList}
-          <Button variant="gradient" size="sm" fullWidth className="mb-2">
+          <Button onClick={handleLogout} variant="gradient" size="sm" fullWidth className="mb-2">
             <span>Logout</span>
           </Button>
         </MobileNav>

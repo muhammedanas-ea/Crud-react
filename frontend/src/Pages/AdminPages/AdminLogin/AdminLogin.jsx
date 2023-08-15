@@ -8,14 +8,19 @@ import { useState } from "react"
 import {Adminsignin} from '../../../Api/adminApi'
 import {ToastContainer,toast} from 'react-toastify'
 import {useNavigate} from 'react-router-dom'
-   
+import {setUserDetails} from '../../../Redux/UserSlice/UserSlice'
+import { useDispatch } from "react-redux"
+import 'react-toastify/dist/ReactToastify.css'
 
 export default function AdminLogin() {
+
 
     const [value,setValue] = useState({
       email:'',password:'',
     });
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+
 
 
     const handleAdminLogin = async (e) => {
@@ -30,9 +35,17 @@ export default function AdminLogin() {
           const response = await Adminsignin(value)
           if(response.data.status){
             localStorage.setItem('admintoken',response.data.token)
+            dispatch(setUserDetails({
+              id:response.data.adminData._id,
+              name:response.data.adminData.name,
+              email:response.data.adminData.email,
+              mob:response.data.adminData.mob,
+              is_admin:response.data.adminData.is_admin,
+              image:response.data.adminData.image
+            }))
             navigate('/admin/dashboard')
           }else{
-            toast(response.data.alert);
+            toast.error(response.data.alert);
           }
         }
       }catch(err){
