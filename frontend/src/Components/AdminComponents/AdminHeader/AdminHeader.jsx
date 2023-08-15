@@ -18,6 +18,8 @@ export default function AdminHeader() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  
+ //***********LOGOUT SECTION REDUX HANDLING SECTION**********//  
   const handleLogout = () =>{
     localStorage.removeItem('admintoken')
     dispatch(logoutDetails({
@@ -29,7 +31,7 @@ export default function AdminHeader() {
       image:''
     }))
     navigate('/admin')
-}
+  }
 
 
   const [openNav, setOpenNav] = React.useState(false);

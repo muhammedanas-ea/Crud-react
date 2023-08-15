@@ -17,8 +17,8 @@ import { toast,ToastContainer } from "react-toastify";
     const [value,setValue] = useState({
         name:'',number:'',email:'',
     })
-    
     const navigate = useNavigate(); 
+    
 
 // *********** USER DATA EDITING SECTION **********//
     useEffect(() =>{

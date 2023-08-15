@@ -21,6 +21,7 @@ import { useNavigate } from "react-router-dom";
     const navigate = useNavigate();
 
 
+//********* USER DETAILS ADDING SECTION IN ADMIN SIDE ************/ 
     const handleSubmit = async (e) =>{
       e.preventDefault();
       try{

@@ -5,7 +5,7 @@ const adminApi = axios.create({
 })
 
 
-
+// ******** ADMIN SIGN IN DATA PASSING AREA **********//
 export async function Adminsignin(signinData){
     try{
         const data = await adminApi.post('/login',signinData);
@@ -17,6 +17,7 @@ export async function Adminsignin(signinData){
 }
 
 
+// ******** ADMIN SECTION ADD USER DETAILS DATA PASSING SECTION **********//
 export async function AddUserDetails(addUserData){
     try{
         const data = await adminApi.post('/addUserData',addUserData);
@@ -27,6 +28,7 @@ export async function AddUserDetails(addUserData){
 }
 
 
+// ******** ADMIN SECTION USER DATA PASSING SECTION **********//
 export async function UserListDetails(){
     try{
         const data = await adminApi.get('/userlist')
@@ -37,6 +39,7 @@ export async function UserListDetails(){
 }
 
 
+// ******** ADMIN SECTION USER DELETING DATA SECTION **********//
 export async function DeleteUser(userid){
     try{
         const data = await adminApi.post('/deleteUser',{userid});
@@ -47,6 +50,7 @@ export async function DeleteUser(userid){
 }
 
 
+// ******** ADMIN SECTION USER EDITING DATA PASSING SECTION **********//
 export async function EditUserData(userId){
     try{
         const data = await adminApi.get(`/editUser/${userId}`)
@@ -57,6 +61,7 @@ export async function EditUserData(userId){
 }
 
 
+// ******** ADMIN SECTION USER UPDATING DATA PASSING SECTION **********//
 export async function UpdateUser(id,updateUserData){
     try{
         const {name,email,number} = updateUserData

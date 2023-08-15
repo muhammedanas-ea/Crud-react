@@ -36,6 +36,7 @@ function UserList() {
   }
 
 
+//*********** USER DATA SEARCHING SECTION **********// 
   const userData = user.filter(user => {
     const searchInputLower = serachInput.toLowerCase();
     const emailMatch = user.email.toLowerCase().includes(searchInputLower);

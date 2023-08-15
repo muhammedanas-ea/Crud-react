@@ -18,6 +18,8 @@ export default function ProfileCard() {
   const dispatch = useDispatch();
   const {id,name,mobile,image,email} = useSelector(state => state.user)
 
+  
+ //*********** USER  SIDE IMAGE HANDLING SECTION ********// 
   const  handleUpdateImage = async (e) =>{
     e.preventDefault();
     const response = await userImage(id,images);

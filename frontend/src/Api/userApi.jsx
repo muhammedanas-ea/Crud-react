@@ -5,6 +5,7 @@ const userApi = axios.create({
 })
 
 
+// ******** USER SIGN UP  DATA PASSING SECTION **********//
 export async function userSignup(singupData){
     try{
         const data = await userApi.post('/signup',singupData);
@@ -14,6 +15,8 @@ export async function userSignup(singupData){
     }
 }
 
+
+// ******** USER LOGIN DATA PASSING SECTION **********//
 export async function userLogin(loginData){
     try{
         const data = await userApi.post('/login',loginData);
@@ -24,6 +27,7 @@ export async function userLogin(loginData){
 }
 
 
+// ******** USER IMAGE UPDATING DATA PASSING SECTION **********//
 export async function userImage(id,images){
     try{
         

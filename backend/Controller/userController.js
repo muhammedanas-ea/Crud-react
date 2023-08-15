@@ -64,6 +64,7 @@ const userLoginVerification = async(req,res) => {
 }
 
 
+// ********** USER IMAGE DATA STORING AND UPDATING SECTION ***********//
 const userprofileImageUpdate = async (req,res) =>{
     try{
         const id=req.body.userId

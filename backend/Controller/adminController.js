@@ -15,6 +15,7 @@ const securePassword = async(password) =>{
 }
 
 
+// ********** ADMIN LOGIN MANGEMENT SECTION ***********//
 const adminLogin = async(req,res) =>{
     try{
 
@@ -43,6 +44,8 @@ const adminLogin = async(req,res) =>{
     }
 }
 
+
+// ********** ADMIN USER DETAILS  ADDDING SECTION ***********//
 const addUserDetails = async(req,res) =>{
     try{
         const {name,email,number,password} = req.body
@@ -69,6 +72,7 @@ const addUserDetails = async(req,res) =>{
 }
 
 
+// ********** ADMIN SIDE USER DETAILS MANGENTING SECTION ***********//
 const userListDetails = async (req,res) =>{
     try{
         const userData = await User.find({is_admin:false})
@@ -84,6 +88,7 @@ const userListDetails = async (req,res) =>{
 }
 
 
+// ********** ADMIN SIDE USER DETAILS DELETING SECTION ***********//
 const deleteUserDetails = async (req,res) =>{
     try{
         const userId = req.body.userid;
@@ -99,6 +104,7 @@ const deleteUserDetails = async (req,res) =>{
 }
 
 
+// ********** ADMIN SIDE USER DETAILS EDITING SECTION ***********//
 const editUserDetails = async (req,res) =>{
     try{
         const userId = req.params.id
@@ -114,6 +120,7 @@ const editUserDetails = async (req,res) =>{
 }
 
 
+// ********** ADMIN USER DATA UPDATING SECTION ***********//
 const updateUserDetails = async (req,res) =>{
     try{
         const {id,name,number,email} = req.body 
